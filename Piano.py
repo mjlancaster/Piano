@@ -52,9 +52,14 @@ sol2 = DigitalOutputDevice(22)
 sol3 = DigitalOutputDevice(5)
 sol4 = DigitalOutputDevice(6)
 
+# Set PWM frequency
+pwm_freq = 5000
+
 # Assign motor pins
 motor_left = PWMOutputDevice(23)
+motor_left.frequency = pwm_freq
 motor_right = PWMOutputDevice(24)
+motor_right.frequency = pwm_freq
 
 # Path of song file (.csv) - must be located in the project directory
 song_path = "song.csv"
@@ -63,5 +68,19 @@ song_path = "song.csv"
 bpm = 260
 tick = 60.0 / float(bpm)
 
+# Initialize motors to 1.0 duty cycle (due to inversion)
+motor_left.value = 1.0
+motor_right.value = 1.0
+
 # Play the song
 playSong(song_path, tick)
+
+# MOTOR TESTS
+# Drive left motor
+motor_left.value = 0.5
+sleep(1.0)
+motor_left.value = 1.0
+sleep(1.0)
+motor_right.value = 0.5
+sleep(1.0)
+motor_right.value = 1.0
