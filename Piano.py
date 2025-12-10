@@ -151,7 +151,7 @@ print("Motors initialized to 1.0")
 #sol0.off()
 
 # Play the song
-#playSong(song_path, tick)
+playSong(song_path, tick)
 
 # MOTOR TESTS
 # Drive left motor
@@ -164,14 +164,14 @@ print("Motors initialized to 1.0")
 #motor_right.value = 1.0
 
 # Updates current location (index in colors_RGB_norm)
-location = getLocation()
+# location = getLocation()
 
 # Set target (index in colors_RGB_norm)
-target = 1
+# target = 1
 
 # Number of consec. triggers necessary to stop
-threshold = 3
+# threshold = 3
 
 #Color motor tests
-print("Beginning motor tests")
-moveTo(target, threshold)
+# print("Beginning motor tests")
+# moveTo(target, threshold)
