@@ -154,12 +154,12 @@ print("Motors initialized to 1.0")
 # Play the song
 playSong(song_path, tick)
 motor_right.value = 0.9
-sleep(0.5)
+sleep(3)
 motor_right.value = 1.0
 sleep(0.5)
 playSong(song_path, tick)
 motor_left.value = 0.9
-sleep(1)
+sleep(6)
 motor_left.value = 1.0
 sleep(0.5)
 playSong(song_path, tick)
