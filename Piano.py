@@ -143,6 +143,10 @@ tick = 60.0 / float(bpm)
 # Initialize motors to 1.0 duty cycle (due to inversion)
 motor_left.value = 1.0
 motor_right.value = 1.0
+print("sleeping now")
+sleep(10)
+print("sleeping again")
+sleep(5)
 print("Motors initialized to 1.0")
 
 # Test fire solenoids
