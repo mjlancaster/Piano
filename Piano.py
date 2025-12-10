@@ -138,14 +138,11 @@ song_path = "song.csv"
 
 # Set tempo
 bpm = 260
-tick = 60.0 / float(bpm)
+tick = 30.0 / float(bpm)
 
 # Initialize motors to 1.0 duty cycle (due to inversion)
 motor_left.value = 1.0
 motor_right.value = 1.0
-print("sleeping now")
-sleep(10)
-print("sleeping again")
 sleep(5)
 print("Motors initialized to 1.0")
 
@@ -156,6 +153,12 @@ print("Motors initialized to 1.0")
 
 # Play the song
 playSong(song_path, tick)
+
+sol0.off()
+sol1.off()
+sol2.off()
+sol3.off()
+sol4.off()
 
 # MOTOR TESTS
 # Drive left motor
