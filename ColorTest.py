@@ -4,6 +4,7 @@ import adafruit_tcs34725
 import math
 from gpiozero import LED
 
+# Normalize Vector
 def normalize(colors):
     length = 0
     for item in colors:
