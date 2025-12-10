@@ -41,7 +41,7 @@ def playSong(path, t):
     # Zero all solenoids first
     zeroSols()
     # Arbitrarily brief pause before beginning, may not be necessary
-    sleep(0.5)
+    sleep(0.25)
     with open(path, mode ='r')as file:
         song = csv.reader(file)
         for chord in song:
