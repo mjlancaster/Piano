@@ -224,6 +224,13 @@ motor_right.frequency = pwm_freq
 # Initializations for color sensor
 i2c = board.I2C()
 sensor = adafruit_tcs34725.TCS34725(i2c)
+
+# Set the integration time to the minimum possible value (2.4ms)
+sensor.integration_time = 2.4 # Value in milliseconds
+
+# Set the gain (optional, increase if readings are too low)
+sensor.gain = 1 # Options are 1, 4, 16, 60
+
 colors_name = ["red", "blue", "green"]
 colors_RGB = [[20, 5, 5], [4, 4, 4], [8, 10, 5]]
 colors_RGB_norm = []
