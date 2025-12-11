@@ -50,7 +50,9 @@ def playSong(path, t, moveSpeed):
                 location = int(chord[0][1:])
             # If "m" tag --> moveTo
             elif (chord[0].startswith("m")):
-                moveTo(location, int(chord[0][1:]), 3, moveSpeed)
+                destination = int(chord[0][1:])
+                print("moving from {location} to: {destination}")
+                moveTo(location, destination, 3, moveSpeed)
             # If an actual chord, play chord
             else:
                 playChord(chord)
@@ -124,6 +126,7 @@ def moveTo(origin, target, thresh, speed):
                         currentKey += 1
                     # If moved 2 color (skipped once) in correct direction:
                     elif (colorSeen - keys[currentKey] == 2 or colorSeen - keys[currentKey] == -1):
+                        print("skipped key")
                         currentKey += 2
             else:
                 i = 0
@@ -140,6 +143,7 @@ def moveTo(origin, target, thresh, speed):
                         currentKey -= 1
                     # If moved 2 color (skipped once) in correct direction:
                     elif (colorSeen - keys[currentKey] == -2 or colorSeen - keys[currentKey] == 1):
+                        print("skipped key")
                         currentKey -= 2
             else:
                 i = 0
