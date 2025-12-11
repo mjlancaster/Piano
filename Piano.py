@@ -51,8 +51,8 @@ def playSong(path, t, moveSpeed):
             # If "m" tag --> moveTo
             elif (chord[0].startswith("m")):
                 destination = int(chord[0][1:])
-                print("moving from {location} to: {destination}")
-                moveTo(location, destination, 3, moveSpeed)
+                print(f"moving from {location} to: {destination}")
+                location = moveTo(location, destination, 3, moveSpeed)
             # If an actual chord, play chord
             else:
                 playChord(chord)
@@ -153,7 +153,7 @@ def moveTo(origin, target, thresh, speed):
     motor_right.value = 1.0
 
     # Update location
-    location = target
+    return target
 
     # OLD CODE :P
     """ while True:
