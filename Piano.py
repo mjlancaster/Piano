@@ -45,8 +45,16 @@ def playSong(path, t):
     with open(path, mode ='r')as file:
         song = csv.reader(file)
         for chord in song:
-            playChord(chord)
-            sleep(t)
+            # If "s" tag --> set current location
+            if (chord[0].startswith("s")):
+                location = chord[0][1:]
+            # If "m" tag --> moveTo
+            elif (chord[0].startswith("m")):
+                moveTo(location, chord[0][1:], 3, 0.8)
+            # If an actual chord, play chord
+            else:
+                playChord(chord)
+                sleep(t)
             
 def normalize(colors):
     length = 0
@@ -61,7 +69,9 @@ def normalize(colors):
         
     return colors_norm
 
-def guessColor(r, g, b, ref_colors):
+# Returns INDEX of identified color in ref_colors[]
+def guessColor():
+    r,g,b,c = sensor.color_raw
     color = normalize([r, g, b])
     guess = 0
     mindist = 80000
@@ -70,18 +80,79 @@ def guessColor(r, g, b, ref_colors):
         if mindist >= distance:
             guess = i
             mindist = distance
-    
-    return guess
-
-def getLocation():
-    r,g,b,c = sensor.color_raw
-    guess = guessColor(r, g, b, colors_RGB_norm)
     print("guess: ", colors_name[guess], " r: ", r, " g ", g, " b: ", b)
     return guess
 
-def moveTo(target, thresh):
+def moveTo(origin, target, thresh, speed):
+    # Direction: 0 = left, 1 = right
+    direction = int(target > origin)
+
+    currentKey = origin
+
+    # The color currently being observed (initialization)
+    colorSeen = keys[origin]
+
+    # Degenerate case
+    if (origin == target):
+        return
+    
+    # Counts number of consec. instances of new color
     i = 0
-    while True:
+
+    # Start motor
+    # If moving right:
+    if (direction):
+        motor_right.value() = speed
+        motor_left.value() = 1.0
+    # If moving left:
+    else:
+        motor_left.value() = speed
+        motor_right.value() = 1.0
+
+    # While motor is moving
+    while (currentKey != target):
+        # If moving right
+        if (direction):
+            prevColorSeen = colorSeen
+            colorSeen = guessColor()
+            if (colorSeen != keys[currentKey] and (i == 0 or colorSeen == prevColorSeen)):
+                i += 1
+                if (i == thresh):
+                    # We have moved to a new color - which color?
+                    # If moved 1 color (no skipping) in correct direction:
+                    if (colorSeen - keys[currentKey] == 1 or colorSeen - keys[currentKey] == -2):
+                        currentKey += 1
+                    # If moved 2 color (skipped once) in correct direction:
+                    elif (colorSeen - keys[currentKey] == 2 or colorSeen - keys[currentKey] == -1):
+                        currentKey += 2
+            else:
+                i = 0
+        # If moving left
+        else:
+            prevColorSeen = colorSeen
+            colorSeen = guessColor()
+            if (colorSeen != keys[currentKey] and (i == 0 or colorSeen == prevColorSeen)):
+                i += 1
+                if (i == thresh):
+                    # We have moved to a new color - which color?
+                    # If moved 1 color (no skipping) in correct direction:
+                    if (colorSeen - keys[currentKey] == -1 or colorSeen - keys[currentKey] == 2):
+                        currentKey -= 1
+                    # If moved 2 color (skipped once) in correct direction:
+                    elif (colorSeen - keys[currentKey] == -2 or colorSeen - keys[currentKey] == 1):
+                        currentKey -= 2
+            else:
+                i = 0
+    
+    # We are now at the correct color --> shut off the motor
+    motor_left.value() = 1.0
+    motor_right.value() = 1.0
+
+    # Update location
+    location = target
+
+    # OLD CODE :P
+    """ while True:
         location = getLocation()
         if (location < target):
             i = 0
@@ -101,11 +172,11 @@ def moveTo(target, thresh):
             motor_left.value = 0.8
         else:
             i += 1
-        if (i == 3):
+        if (i == thresh):
             motor_right.value = 1.0
             motor_left.value = 1.0
             print("breaking")
-            break
+            break """
 
 # Assign solenoid pins
 sol0 = DigitalOutputDevice(22)
@@ -126,19 +197,23 @@ motor_right.frequency = pwm_freq
 # Initializations for color sensor
 i2c = board.I2C()
 sensor = adafruit_tcs34725.TCS34725(i2c)
-colors_name = ["red", "green", "pink", "yellow", "blue"]
-colors_RGB = [[20, 5, 5], [8, 10, 5], [12, 5, 5], [33, 23, 9], [4, 4, 4]]
+colors_name = ["red", "blue", "green"]
+colors_RGB = [[20, 5, 5], [4, 4, 4], [8, 10, 5]]
 colors_RGB_norm = []
 for item in colors_RGB:
     colors_RGB_norm.append(normalize(item))
+keys = [0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0]
 print("Color sensor initializations complete")
 
 # Path of song file (.csv) - must be located in the project directory
 song_path = "song.csv"
 
 # Set tempo
-bpm = 260
+bpm = 300
 tick = 30.0 / float(bpm)
+
+# Store current location
+location = 0
 
 # Initialize motors to 1.0 duty cycle (due to inversion)
 motor_left.value = 1.0
@@ -152,7 +227,7 @@ print("Motors initialized to 1.0")
 #sol0.off()
 
 # Play the song
-playSong(song_path, tick)
+""" playSong(song_path, tick)
 motor_right.value = 0.9
 sleep(3)
 motor_right.value = 1.0
@@ -162,7 +237,7 @@ motor_left.value = 0.9
 sleep(6)
 motor_left.value = 1.0
 sleep(0.5)
-playSong(song_path, tick)
+playSong(song_path, tick) """
 
 sol0.off()
 sol1.off()
@@ -179,16 +254,3 @@ sol4.off()
 #motor_right.value = 0.5
 #sleep(1.0)
 #motor_right.value = 1.0
-
-# Updates current location (index in colors_RGB_norm)
-# location = getLocation()
-
-# Set target (index in colors_RGB_norm)
-# target = 1
-
-# Number of consec. triggers necessary to stop
-# threshold = 3
-
-#Color motor tests
-# print("Beginning motor tests")
-# moveTo(target, threshold)
