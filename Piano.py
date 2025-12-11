@@ -47,10 +47,10 @@ def playSong(path, t):
         for chord in song:
             # If "s" tag --> set current location
             if (chord[0].startswith("s")):
-                location = chord[0][1:]
+                location = int(chord[0][1:])
             # If "m" tag --> moveTo
             elif (chord[0].startswith("m")):
-                moveTo(location, chord[0][1:], 3, 0.8)
+                moveTo(location, int(chord[0][1:]), 3, 0.8)
             # If an actual chord, play chord
             else:
                 playChord(chord)
