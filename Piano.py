@@ -186,8 +186,8 @@ def moveTo(origin, target, thresh, speed):
 sol0 = DigitalOutputDevice(22)
 sol1 = DigitalOutputDevice(27)
 sol2 = DigitalOutputDevice(17)
-sol3 = DigitalOutputDevice(24)
-sol4 = DigitalOutputDevice(25)
+sol3 = DigitalOutputDevice(25)
+sol4 = DigitalOutputDevice(24)
 
 # Set PWM frequency
 pwm_freq = 5000
@@ -213,7 +213,7 @@ print("Color sensor initializations complete")
 song_path = "song.csv"
 
 # Set tempo
-bpm = 180
+bpm = 120
 tick = 30.0 / float(bpm)
 
 # Store current location
