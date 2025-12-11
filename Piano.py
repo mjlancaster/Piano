@@ -75,7 +75,7 @@ def playSong(path, t, moveSpeed):
             elif (chord[0].startswith("m")):
                 destination = int(chord[0][1:])
                 print(f"moving from {location} to: {destination}")
-                location = moveTo(location, destination, 3, moveSpeed)
+                location = moveTo(location, destination, 2, moveSpeed)
             # If an actual chord, play chord
             else:
                 delay = playChord(chord)
@@ -260,7 +260,7 @@ print("Motors initialized to 1.0")
 #sleep(1.0)
 #sol0.off()
 
-playSong("fetty.csv", tick, 0.7)
+playSong("fetty.csv", tick, 0.6)
 
 # Play the song
 """ playSong(song_path, tick)
