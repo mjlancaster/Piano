@@ -37,7 +37,7 @@ def zeroSols():
     sol4.off()
 
 # Plays the song encoded in the .csv found at path, at tick speed t
-def playSong(path, t):
+def playSong(path, t, moveSpeed):
     # Zero all solenoids first
     zeroSols()
     # Arbitrarily brief pause before beginning, may not be necessary
@@ -50,7 +50,7 @@ def playSong(path, t):
                 location = int(chord[0][1:])
             # If "m" tag --> moveTo
             elif (chord[0].startswith("m")):
-                moveTo(location, int(chord[0][1:]), 3, 0.8)
+                moveTo(location, int(chord[0][1:]), 3, moveSpeed)
             # If an actual chord, play chord
             else:
                 playChord(chord)
@@ -209,7 +209,7 @@ print("Color sensor initializations complete")
 song_path = "song.csv"
 
 # Set tempo
-bpm = 300
+bpm = 120
 tick = 30.0 / float(bpm)
 
 # Store current location
@@ -218,13 +218,15 @@ location = 0
 # Initialize motors to 1.0 duty cycle (due to inversion)
 motor_left.value = 1.0
 motor_right.value = 1.0
-sleep(5)
+sleep(1)
 print("Motors initialized to 1.0")
 
 # Test fire solenoids
 #sol0.on()
 #sleep(1.0)
 #sol0.off()
+
+playSong(song_path, tick, 0.8)
 
 # Play the song
 """ playSong(song_path, tick)
