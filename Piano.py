@@ -102,12 +102,12 @@ def moveTo(origin, target, thresh, speed):
     # Start motor
     # If moving right:
     if (direction):
-        motor_right.value() = speed
-        motor_left.value() = 1.0
+        motor_right.value = speed
+        motor_left.value = 1.0
     # If moving left:
     else:
-        motor_left.value() = speed
-        motor_right.value() = 1.0
+        motor_left.value = speed
+        motor_right.value = 1.0
 
     # While motor is moving
     while (currentKey != target):
@@ -145,8 +145,8 @@ def moveTo(origin, target, thresh, speed):
                 i = 0
     
     # We are now at the correct color --> shut off the motor
-    motor_left.value() = 1.0
-    motor_right.value() = 1.0
+    motor_left.value = 1.0
+    motor_right.value = 1.0
 
     # Update location
     location = target
