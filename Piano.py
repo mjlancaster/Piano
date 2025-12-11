@@ -69,14 +69,14 @@ def normalize(colors):
         
     return colors_norm
 
-# Returns INDEX of identified color in ref_colors[]
+# Returns INDEX of identified color in colors_RGB_norm[]
 def guessColor():
     r,g,b,c = sensor.color_raw
     color = normalize([r, g, b])
     guess = 0
     mindist = 80000
-    for i in range(len(ref_colors)):
-        distance = math.dist(color, ref_colors[i])
+    for i in range(len(colors_RGB_norm)):
+        distance = math.dist(color, colors_RGB_norm[i])
         if mindist >= distance:
             guess = i
             mindist = distance
