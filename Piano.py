@@ -11,37 +11,62 @@ def playChord(chord):
         if (sol0.value == 1):
             sol0.off()
             sleep(tick/4)
-        sol0.on()
+            sol0.on()
+            sleep(3*tick/4)
+        else:
+            sol0.on()
+            sleep(tick)
     elif (chord[0] == '-' and sol0.value == 1):
         sol0.off()
+        sleep(tick)
     if (chord[1] == '1'):
         if (sol1.value == 1):
             sol1.off()
             sleep(tick/4)
-        sol1.on()
+            sol1.on()
+            sleep(3*tick/4)
+        else:
+            sol1.on()
+            sleep(tick)
     elif (chord[1] == '-' and sol1.value == 1):
         sol1.off()
+        sleep(tick)
     if (chord[2] == '1'):
         if (sol2.value == 1):
             sol2.off()
             sleep(tick/4)
-        sol2.on()
+            sol2.on()
+            sleep(3*tick/4)
+        else:
+            sol2.on()
+            sleep(tick)
     elif (chord[2] == '-' and sol2.value == 1):
         sol2.off()
+        sleep(tick)
     if (chord[3] == '1'):
         if (sol3.value == 1):
             sol3.off()
             sleep(tick/4)
-        sol3.on()
+            sol3.on()
+            sleep(3*tick/4)
+        else:
+            sol3.on()
+            sleep(tick)
     elif (chord[3] == '-' and sol3.value == 1):
         sol3.off()
+        sleep(tick)
     if (chord[4] == '1'):
         if (sol4.value == 1):
             sol4.off()
             sleep(tick/4)
-        sol4.on()
+            sol4.on()
+            sleep(3*tick/4)
+        else:
+            sol4.on()
+            sleep(tick)
     elif (chord[4] == '-' and sol4.value == 1):
         sol4.off()
+        sleep(tick)
 
 # Helper function - zeroes all solenoids
 def zeroSols():
@@ -58,6 +83,7 @@ def playSong(path, t, moveSpeed):
     # Arbitrarily brief pause before beginning, may not be necessary
     sleep(0.25)
     with open(path, mode ='r')as file:
+        
         song = csv.reader(file)
         for chord in song:
             # If "s" tag --> set current location
@@ -71,7 +97,6 @@ def playSong(path, t, moveSpeed):
             # If an actual chord, play chord
             else:
                 playChord(chord)
-                sleep(t)
             
 def normalize(colors):
     length = 0
