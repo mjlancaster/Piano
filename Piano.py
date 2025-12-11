@@ -10,35 +10,35 @@ def playChord(chord):
     if (chord[0] == '1'):
         if (sol0.value == 1):
             sol0.off()
-            sleep(tick/10)
+            sleep(tick/4)
         sol0.on()
     elif (chord[0] == '-' and sol0.value == 1):
         sol0.off()
     if (chord[1] == '1'):
         if (sol1.value == 1):
             sol1.off()
-            sleep(tick/10)
+            sleep(tick/4)
         sol1.on()
     elif (chord[1] == '-' and sol1.value == 1):
         sol1.off()
     if (chord[2] == '1'):
         if (sol2.value == 1):
             sol2.off()
-            sleep(tick/10)
+            sleep(tick/4)
         sol2.on()
     elif (chord[2] == '-' and sol2.value == 1):
         sol2.off()
     if (chord[3] == '1'):
         if (sol3.value == 1):
             sol3.off()
-            sleep(tick/10)
+            sleep(tick/4)
         sol3.on()
     elif (chord[3] == '-' and sol3.value == 1):
         sol3.off()
     if (chord[4] == '1'):
         if (sol4.value == 1):
             sol4.off()
-            sleep(tick/10)
+            sleep(tick/4)
         sol4.on()
     elif (chord[4] == '-' and sol4.value == 1):
         sol4.off()
@@ -245,7 +245,7 @@ print("Motors initialized to 1.0")
 #sleep(1.0)
 #sol0.off()
 
-playSong("fetty.csv", tick, 0.8)
+playSong("fetty.csv", tick, 0.7)
 
 # Play the song
 """ playSong(song_path, tick)
