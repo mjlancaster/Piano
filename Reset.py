@@ -26,3 +26,5 @@ sol1.off()
 sol2.off()
 sol3.off()
 sol4.off()
+
+print('reset')
