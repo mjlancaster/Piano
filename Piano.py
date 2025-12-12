@@ -249,7 +249,7 @@ print("Color sensor initializations complete")
 song_path = "song.csv"
 
 # Set tempo
-bpm = 250
+bpm = 125
 tick = 30.0 / float(bpm)
 
 # Store current location
