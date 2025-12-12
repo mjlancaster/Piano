@@ -5,6 +5,8 @@ import adafruit_tcs34725
 import math
 import csv
 
+pwm_freq = 5000
+
 motor_left = PWMOutputDevice(5)
 motor_left.frequency = pwm_freq
 motor_right = PWMOutputDevice(6)
