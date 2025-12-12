@@ -249,7 +249,7 @@ print("Color sensor initializations complete")
 song_path = "song.csv"
 
 # Set tempo
-bpm = 300
+bpm = 250
 tick = 30.0 / float(bpm)
 
 # Store current location
@@ -266,7 +266,7 @@ print("Motors initialized to 1.0")
 #sleep(1.0)
 #sol0.off()
 
-playSong("mj.csv", tick, 0.3)
+playSong("fetty.csv", tick, 0.3)
 
 # Play the song
 """ playSong(song_path, tick)
