@@ -268,7 +268,7 @@ print("Motors initialized to 1.0")
 
 playSong("perfect.csv", tick, 0.3)
 
-# Play the song
+# Play the son
 """ playSong(song_path, tick)
 motor_right.value = 0.9
 sleep(3)
