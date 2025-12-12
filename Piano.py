@@ -266,7 +266,7 @@ print("Motors initialized to 1.0")
 #sleep(1.0)
 #sol0.off()
 
-playSong("mj.csv", tick, 0.3)
+playSong("perfect.csv", tick, 0.3)
 
 # Play the song
 """ playSong(song_path, tick)
