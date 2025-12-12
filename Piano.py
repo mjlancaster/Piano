@@ -138,6 +138,9 @@ def moveTo(origin, target, thresh, speed):
     while (currentKey != target):
         # If moving right
         if (direction):
+            # Slow down when one key away
+            if (currentKey == target - 1):
+                motor_right.value = 0.7
             prevColorSeen = colorSeen
             colorSeen = guessColor()
             if (colorSeen != keys[currentKey] and (i == 0 or colorSeen == prevColorSeen)):
@@ -155,6 +158,9 @@ def moveTo(origin, target, thresh, speed):
                 i = 0
         # If moving left
         else:
+            # Slow down when one key away
+            if (currentKey == target + 1):
+                motor_left.value = 0.7
             prevColorSeen = colorSeen
             colorSeen = guessColor()
             if (colorSeen != keys[currentKey] and (i == 0 or colorSeen == prevColorSeen)):
