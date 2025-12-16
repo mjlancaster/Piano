@@ -1,0 +1,29 @@
+
+>>> %Run Piano_test.py
+Color sensor initializations complete
+Motors initialized to 1.0
+moving from 1 to: 4
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  green  r:  1  g  2  b:  1
+guess:  green  r:  2  g  2  b:  1
+guess:  green  r:  2  g  2  b:  1
+guess:  green  r:  3  g  2  b:  1
+guess:  green  r:  3  g  2  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  4  g  1  b:  1
+guess:  red  r:  3  g  1  b:  1
+guess:  red  r:  3  g  1  b:  1
+guess:  red  r:  2  g  1  b:  1
+guess:  red  r:  2  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
+guess:  blue  r:  1  g  1  b:  1
